@@ -1,22 +1,22 @@
-const express = require('express');
-const helmet = require('helmet');
-const morgan = require('morgan');
+const express = require("express");
+const helmet = require("helmet");
+const morgan = require("morgan");
 
-const GenerationEngine = require('./generation/engine');
+const GenerationEngine = require("./generation/engine");
+const engine = new GenerationEngine();
+
+const dragonRouter = require("./api/dragon");
+const generationRouter = require("./api/generation");
 
 const app = express();
+
+app.locals.engine = engine; // to avoid loops
+
 app.use(helmet());
+app.use("/dragon", dragonRouter);
+app.use("/generation", generationRouter);
 
-const engine = new GenerationEngine();
 engine.start();
-
-app.get('/dragon/new', (req, res) => {
-    res.json({
-        dragon: engine
-            .generation
-            .newDragon()
-    })
-});
 
 // const PORT = 6000;
 
