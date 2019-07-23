@@ -1,29 +1,32 @@
-const Generation = require('./generation/generation');
+const Generation = require("./generation");
 
 class GenerationEngine {
-    constructor() {
-        // this.expiration = generation.expiration;
-        this.generation = null;
-        this.timer = null;
-    }
+  constructor() {
+    // this.expiration = generation.expiration;
+    this.generation = null;
+    this.timer = null;
+  }
 
-    start() {
-        console.log('Generation starts...')
-        this.buildNewGeneration();
-    }
+  start() {
+    console.log("Generation starts...");
+    this.buildNewGeneration();
+  }
 
-    stop() {
-        console.log('Generation ends...');
-        clearTimeout(this.timer);
-    }
+  stop() {
+    console.log("Generation ends...");
+    clearTimeout(this.timer);
+  }
 
-    buildNewGeneration() {
-        this.generation = new Generation();
+  buildNewGeneration() {
+    this.generation = new Generation();
 
-        console.log('new generation:', this.generation)
+    console.log("new generation:", this.generation);
 
-        this.timer = setTimeout(() => this.buildNewGeneration(), this.generation.expiration.getTime() - Date.now())
-    }
+    this.timer = setTimeout(
+      () => this.buildNewGeneration(),
+      this.generation.expiration.getTime() - Date.now()
+    );
+  }
 }
 
 module.exports = GenerationEngine;
