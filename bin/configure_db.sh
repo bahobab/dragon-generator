@@ -17,3 +17,7 @@ psql -U node_user dragonstackdb < ./bin/sql/dragonTrait.sql
 node ./bin/insertTraits.js
 
 echo 'Done Configuring dragonstackdb'
+
+# ************ example queries: ********************
+# ragonstackdb=# select * from trait INNER JOIN dragonTrait ON trait.id = dragonTrait."traitId";
+# dragonstackdb=# select * from dragon INNER JOIN dragonTrait ON dragon.id = dragonTrait."dragonId" INNER JOIN trait ON dragonTrait."traitId" = trait.id;

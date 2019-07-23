@@ -4,11 +4,15 @@ const DragonTable = require("../dragon/table");
 
 const router = new Router();
 
+// router.get("/dragons/:dragonId", (req, res, next) => {
+//
+// });
+
 router.get("/new", (req, res, next) => {
   const newDragon = req.app.locals.engine.generation.newDragon();
   DragonTable.storeDragon(newDragon)
     .then(dragonId => {
-      console.log("dragonId", dragonId);
+      // console.log("dragonId", dragonId);
       newDragon.dragonId = dragonId;
 
       res.json({
