@@ -4,7 +4,7 @@ const DragonTable = require("../dragon/table");
 
 const router = new Router();
 
-router.get("/new", (req, res) => {
+router.get("/new", (req, res, next) => {
   const newDragon = req.app.locals.engine.generation.newDragon();
   DragonTable.storeDragon(newDragon)
     .then(dragonId => {
@@ -15,7 +15,7 @@ router.get("/new", (req, res) => {
         dragon: newDragon
       });
     })
-    .catch(error => console.error(error));
+    .catch(error => next(error)); // hands over handling to next middleware
 });
 
 module.exports = router;
